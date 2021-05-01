@@ -5,6 +5,9 @@ const dotenv = require('dotenv')
 
 dotenv.config();
 
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
+
 const conversationRoutes = require('./api/routes/conversations')
 const visitorRoutes = require('./api/routes/visitors')
 
