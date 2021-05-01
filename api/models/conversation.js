@@ -2,18 +2,19 @@ const mongoose = require("mongoose")
 
 const conversationSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    visitor_id: 'string',
-    visitor_online: 'boolean',
-    last_message: 'string',
-    last_message_time: 'number',
-    conversation_created_date: 'number',
+    visitor_id: mongoose.Schema.Types.ObjectId,
+    visitor_online: Boolean,
+    last_message: String,
+    last_message_time: Number,
+    conversation_created_date: Number,
     visitor_data: {
-        name: 'number',
-        ip_address: 'string',
-        os: 'string',
-        browser: 'string',
-        phone: 'string',
-        address: 'string'
+        name: String,
+        ip_address: String,
+        os: String,
+        browser: String,
+        phone: String,
+        email: String,
+        address: String
     },
     conversation_data: {
         messages: []
