@@ -6,8 +6,30 @@ exports.conversations_get_all = (req, res, next) => {
     res.send(req.params)
 }
 
+// Get a conversation
+exports.conversations_get_conversation = (req, res, next) => {
+    // Find a conversation matching the requested visitor id
+    const conversation = Conversation.find({
+        visitor_id: req.params.visitor_id
+    })
+    conversation
+    .then(result => {
+        console.log(result)
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        console.log(error)
+        res.status(500).json({
+            error: err
+        })
+    })
+}
+
+// Create a new conversation
 exports.conversations_create_conversation = (req, res, next) => {
+    // Generate a mongoose ObjectId
     const id = mongoose.Types.ObjectId()
+    // Create a new instance of the Conversation model
     const conversation = new Conversation({
         _id: id,
         visitor_id: id,
@@ -29,11 +51,14 @@ exports.conversations_create_conversation = (req, res, next) => {
         }
     })
     conversation
+    // Save the created document
     .save()
+    // Output the response
     .then(result => {
         console.log(result)
         res.status(201).json(result)
     })
+    // Catch any errors that occur if the request fails
     .catch(err => {
         console.log(err)
         res.status(500).json({
