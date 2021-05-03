@@ -7,9 +7,10 @@ exports.conversations_get_all = (req, res, next) => {
 }
 
 exports.conversations_create_conversation = (req, res, next) => {
+    const id = mongoose.Types.ObjectId()
     const conversation = new Conversation({
-        _id: mongoose.Types.ObjectId(),
-        visitor_id: mongoose.Types.ObjectId(),
+        _id: id,
+        visitor_id: id,
         visitor_online: req.body.visitor_online,
         last_message: req.body.last_message,
         last_message_time: req.body.last_message_time,
