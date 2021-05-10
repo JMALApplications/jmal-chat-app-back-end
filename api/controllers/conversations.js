@@ -1,9 +1,20 @@
 const mongoose = require('mongoose')
-const { request } = require('../../app')
+// const { request } = require('../../app')
 const Conversation = require('../models/conversation')
 
 exports.conversations_get_all = (req, res, next) => {
-    res.send(req.params)
+    const conversation = Conversation.find()
+    conversation
+    .then(result => {
+        console.log(result)
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    })
 }
 
 // Get a conversation
