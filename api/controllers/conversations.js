@@ -81,3 +81,22 @@ exports.conversations_create_conversation = (req, res, next) => {
 exports.conversations_update_conversation = (req, res, next) => {
     res.send(req.params)
 }
+
+exports.conversations_delete_conversation = (req, res, next) => {
+    const conversation = Conversation.deleteOne({
+        visitor_id: req.body.visitor_id
+    })
+    conversation
+    .then(result => {
+        console.log(result)
+        res.status(200).json({
+            message: "Conversation with visitor_id " + req.body.visitor_id + " successfully removed." 
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    })
+}
