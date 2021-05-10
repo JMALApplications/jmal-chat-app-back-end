@@ -14,9 +14,7 @@ router.route('/:visitor_id')
     .get(ConversationsController.conversations_get_conversation)
     // update a conversation
     .patch(ConversationsController.conversations_update_conversation)
-    //delete a conversation
-    .delete((req, res) => {
-        res.send(req.params)
-    })
+
+router.delete('/', ConversationsController.conversations_delete_conversation)
 
 module.exports = router
