@@ -32,3 +32,33 @@ exports.visitors_get_visitor = (req, res, next) => {
         })
     })
 }
+
+exports.visitors_create_visitor = (req, res, next) => {
+    const id = mongoose.Types.ObjectId()
+    const visitor = new Visitor({
+        _id: id,
+        visitor_id: id,
+        visitor_online: req.body.visitor_online,
+        visitor_data: {
+            name: req.body.name,
+            ip_address: req.body.ip_address,
+            os: req.body.os,
+            browser: req.body.browser,
+            phone: req.body.phone,
+            email: req.body.email,
+            address: req.body.address
+        }
+    })
+    visitor
+    .save()
+    .then(result => {
+        console.log(result)
+        res.status(201).json(result)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    })
+}
