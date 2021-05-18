@@ -10,6 +10,7 @@ const visitorSchema = new mongoose.Schema({
         os: String,
         browser: String,
         phone: String,
+        email: String,
         address: String
     }
 })
