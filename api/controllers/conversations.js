@@ -57,9 +57,7 @@ exports.conversations_create_conversation = (req, res, next) => {
             email: req.body.visitor_data.email,
             address: req.body.visitor_data.address
         },
-        conversation_data: {
-            messages: [req.body.conversation_data.messages]
-        }
+        messages: [req.body.message]
     })
     conversation
     // Save the created document
@@ -79,7 +77,35 @@ exports.conversations_create_conversation = (req, res, next) => {
 }
 
 exports.conversations_update_conversation = (req, res, next) => {
-    res.send(req.params)
+    const conversation = Conversation.updateOne(
+        { _id: req.params.visitor_id},
+        { $push : 
+            { 
+                messages: {
+                    visitor_id: req.params.visitor_id,
+                    message_id: req.body.message_id,
+                    operator_id: req.body.message.type,
+                    message: {
+                        type: req.body.message.type,
+                        message: req.body.message.message
+                    },
+                    time_sent: req.body.time_sent,
+                    sent_by: req.body.sent_by
+                } 
+            } 
+        }
+    )
+    conversation
+    .then(result => {
+        console.log(result)
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    })
 }
 
 exports.conversations_delete_conversation = (req, res, next) => {
