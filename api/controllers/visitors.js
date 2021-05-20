@@ -62,3 +62,22 @@ exports.visitors_create_visitor = (req, res, next) => {
         })
     })
 }
+
+exports.visitors_update_visitor_online = (req, res, next) => {
+    const visitor = Visitor.updateOne(
+        { _id: req.params.visitor_id},
+        { visitor_online: req.body.visitor_online }
+    )
+    visitor
+    .then(result => {
+        console.log(result)
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    })
+
+}
