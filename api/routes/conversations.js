@@ -7,7 +7,7 @@ router.route('/')
     // get all conversations
     .get(ConversationsController.conversations_get_all)
     // create a conversation
-    .post(Conversations.conversations_create_conversation)
+    .post(ConversationsController.conversations_create_conversation)
     // delete a conversation
     .delete(ConversationsController.conversations_delete_conversation)
 
