@@ -16,9 +16,17 @@ const conversationSchema = new mongoose.Schema({
         email: String,
         address: String
     },
-    conversation_data: {
-        messages: []
-    }
+    messages: [ {
+        visitor_id: String,
+        message_id: String,
+        operator_id: String,
+        message: {
+            type: { type: String },
+            message: { type: String }
+        },
+        time_sent: Number,
+        sent_by: String
+    } ]
 })
 
 module.exports = mongoose.model('Conversation', conversationSchema)
