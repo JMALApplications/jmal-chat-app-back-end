@@ -13,11 +13,15 @@ exports.conversations_get_all = (req, res, next) => {
         messages
     `)
     .then(docs => {
-        const response = {
-            length: docs.length,
-            conversations: docs
+        if (docs) {
+            const response = {
+                length: docs.length,
+                conversations: docs
+            }
+            res.status(200).json(response)
+        } else {
+            res.status(404).json({message: "No Conversations found."})
         }
-        res.status(200).json(response)
     })
     .catch(err => {
         res.status(500).json({
