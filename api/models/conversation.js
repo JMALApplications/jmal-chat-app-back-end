@@ -2,20 +2,20 @@ const mongoose = require("mongoose")
 
 const conversationSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    visitor_id: mongoose.Schema.Types.ObjectId,
-    last_message: String,
-    last_message_time: Number,
-    conversation_created_date: Number,
+    visitor_id: { type: mongoose.Schema.Types.ObjectId, required: true },
+    last_message: { type: String, required: true },
+    last_message_time: { type: Number, required: true },
+    conversation_created_date: {type: Number, required: true },
     messages: [ {
-        visitor_id: String,
-        message_id: String,
-        operator_id: String,
+        visitor_id: { type: String, required: true },
+        message_id: { type: String, required: true },
+        operator_id: { type: String, required: true },
         message: {
-            type: { type: String },
-            message: { type: String }
+            type: { type: String, required: true },
+            message: { type: String, required: true }
         },
-        time_sent: Number,
-        sent_by: String
+        time_sent: { type: Number, required: true },
+        sent_by: { type: String, required: true }
     } ]
 })
 
