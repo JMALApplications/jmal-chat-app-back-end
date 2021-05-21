@@ -81,3 +81,21 @@ exports.visitors_update_visitor_online = (req, res, next) => {
     })
 
 }
+
+exports.visitors_update_visitor_name = (req, res, next) => {
+    const visitor = Visitor.updateOne(
+        { _id: req.params.visitor_id },
+        { $set: { 'visitor_data.name' : req.body.visitor_data.name } }
+    )
+    visitor
+    .then(result => {
+        console.log(result)
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    })
+}
