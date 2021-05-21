@@ -40,11 +40,15 @@ exports.conversations_get_conversation = (req, res, next) => {
         conversation_created_date
         messages
     `)
-    .then(docs => {
-        const response = {
-            conversation: docs
+    .then(doc => {
+        if (doc) {
+            const response = {
+                conversation: doc
+            }
+            res.status(200).json(response)
+        } else {
+            res.status(404).json({message: "Conversation with requested ID not found."})
         }
-        res.status(200).json(response)
     })
     .catch(err => {
         res.status(500).json({
