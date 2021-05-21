@@ -136,3 +136,22 @@ exports.visitors_update_visitor_phone = (req, res, next) => {
     })
 }
 
+exports.visitors_update_visitor_email = (req, res, next) => {
+    const visitor = Visitor.updateOne(
+        { _id: req.params.visitor_id },
+        { $set : { 'visitor_data.email' : req.body.visitor_data.email } }
+    )
+    visitor
+    .then(result => {
+        console.log(result)
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    })
+}
+
+
