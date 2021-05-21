@@ -5,12 +5,21 @@ const Conversation = require('../models/conversation')
 exports.conversations_get_all = (req, res, next) => {
     const conversation = Conversation.find()
     conversation
-    .then(result => {
-        console.log(result)
-        res.status(200).json(result)
+    .select(`
+        visitor_id 
+        last_message 
+        last_message_time 
+        conversation_created_date
+        messages
+    `)
+    .then(docs => {
+        const response = {
+            length: docs.length,
+            conversations: docs
+        }
+        res.status(200).json(response)
     })
     .catch(err => {
-        console.log(err)
         res.status(500).json({
             error: err
         })
@@ -24,12 +33,20 @@ exports.conversations_get_conversation = (req, res, next) => {
         visitor_id: req.params.visitor_id
     })
     conversation
-    .then(result => {
-        console.log(result)
-        res.status(200).json(result)
+    .select(`
+        visitor_id 
+        last_message 
+        last_message_time 
+        conversation_created_date
+        messages
+    `)
+    .then(docs => {
+        const response = {
+            conversation: docs
+        }
+        res.status(200).json(response)
     })
     .catch(err => {
-        console.log(error)
         res.status(500).json({
             error: err
         })
@@ -54,12 +71,10 @@ exports.conversations_create_conversation = (req, res, next) => {
     .save()
     // Output the response
     .then(result => {
-        console.log(result)
         res.status(201).json(result)
     })
     // Catch any errors that occur if the request fails
     .catch(err => {
-        console.log(err)
         res.status(500).json({
             error: err
         })
@@ -87,11 +102,9 @@ exports.conversations_update_conversation = (req, res, next) => {
     )
     conversation
     .then(result => {
-        console.log(result)
         res.status(200).json(result)
     })
     .catch(err => {
-        console.log(err)
         res.status(500).json({
             error: err
         })
@@ -104,13 +117,11 @@ exports.conversations_delete_conversation = (req, res, next) => {
     })
     conversation
     .then(result => {
-        console.log(result)
         res.status(200).json({
             message: "Conversation with visitor_id " + req.body.visitor_id + " successfully removed." 
         })
     })
     .catch(err => {
-        console.log(err)
         res.status(500).json({
             error: err
         })
