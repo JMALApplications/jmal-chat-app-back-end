@@ -6,11 +6,15 @@ exports.visitors_get_all = (req, res, next) => {
     visitor
     .select('visitor_id visitor_online visitor_data')
     .then(docs => {
-        const response = {
-            count: docs.length,
-            visitors: docs
+        if (docs) {
+            const response = {
+                count: docs.length,
+                visitors: docs
+            }
+            res.status(200).json(response)    
+        } else {
+            res.status(404).json({message: "No Visitors found."})
         }
-        res.status(200).json(response)
     })
     .catch(err => {
         res.status(500).json({
