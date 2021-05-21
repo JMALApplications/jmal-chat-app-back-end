@@ -20,4 +20,7 @@ router.route('/:visitor_id/VisitorBrowser')
 router.route('/:visitor_id/VisitorPhone')
 .patch(VisitorsController.visitors_update_visitor_phone)
 
+router.route('/:visitor_id/VisitorEmail')
+.patch(VisitorsController.visitors_update_visitor_email)
+
 module.exports = router
