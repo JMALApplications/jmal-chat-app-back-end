@@ -17,4 +17,7 @@ router.route('/:visitor_id/VisitorName')
 router.route('/:visitor_id/VisitorBrowser')
 .patch(VisitorsController.visitors_update_visitor_browser)
 
+router.route('/:visitor_id/VisitorPhone')
+.patch(VisitorsController.visitors_update_visitor_phone)
+
 module.exports = router
