@@ -14,8 +14,6 @@ const visitorRoutes = require('./api/routes/visitors')
 mongoose.connect(process.env.ATLAS_LOGIN, {useNewUrlParser: true, useUnifiedTopology: true})
 
 app.use('/conversations', conversationRoutes)
-
-/** Uncomment when visitors routes file has routes */
-// app.use('/visitors', visitorRoutes)
+app.use('/visitors', visitorRoutes)
 
 module.exports = app
