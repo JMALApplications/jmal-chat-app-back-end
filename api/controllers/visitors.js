@@ -40,13 +40,13 @@ exports.visitors_create_visitor = (req, res, next) => {
         visitor_id: id,
         visitor_online: req.body.visitor_online,
         visitor_data: {
-            name: req.body.name,
-            ip_address: req.body.ip_address,
-            os: req.body.os,
-            browser: req.body.browser,
-            phone: req.body.phone,
-            email: req.body.email,
-            address: req.body.address
+            name: req.body.visitor_data.name,
+            ip_address: req.body.visitor_data.ip_address,
+            os: req.body.visitor_data.os,
+            browser: req.body.visitor_data.browser,
+            phone: req.body.visitor_data.phone,
+            email: req.body.visitor_data.email,
+            address: req.body.visitor_data.address
         }
     })
     visitor
