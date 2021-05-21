@@ -8,7 +8,10 @@ router.route('/')
 
 router.route('/:visitor_id').get(VisitorsController.visitors_get_visitor)
 
-router.route('/:id/VisitorOnline')
+router.route('/:visitor_id/VisitorOnline')
 .patch(VisitorsController.visitors_update_visitor_online)
+
+router.route('/:visitor_id/VisitorName')
+.patch(VisitorsController.visitors_update_visitor_name) 
 
 module.exports = router
