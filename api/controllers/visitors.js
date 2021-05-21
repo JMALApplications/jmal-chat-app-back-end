@@ -25,11 +25,15 @@ exports.visitors_get_visitor = (req, res, next) => {
     })
     visitor
     .select('visitor_id visitor_online visitor_data')
-    .then(docs => {
-        const response = {
-            visitor: docs
+    .then(doc => {
+        if (doc) {
+            const response = {
+                visitor: doc
+            }
+            res.status(200).json(response)
+        } else {
+            res.status(404).json({message: "Visitor with requested ID not found."})
         }
-        res.status(200).json(response)
     })
     .catch(err => {
         res.status(500).json({
