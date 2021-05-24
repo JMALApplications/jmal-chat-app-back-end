@@ -38,3 +38,20 @@ exports.user_signup = (req, res, next) => {
         }
     })
 }
+
+exports.user_delete_user = (req, res, next) => {
+    const user = User.deleteOne({
+        _id: req.params.id
+    })
+    user
+    .then(result => {
+        res.status(200).json({
+            message: "User with email " + req.params.id + " successfully removed." 
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        })
+    })
+}
