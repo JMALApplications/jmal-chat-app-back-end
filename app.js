@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const morgan = require('morgan')
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ const visitorRoutes = require('./api/routes/visitors')
 const userRoutes = require('./api/routes/user')
 
 mongoose.connect(process.env.ATLAS_LOGIN, {useNewUrlParser: true, useUnifiedTopology: true})
+
+app.use(morgan('dev'))
 
 app.use('/conversations', conversationRoutes)
 app.use('/visitors', visitorRoutes)
