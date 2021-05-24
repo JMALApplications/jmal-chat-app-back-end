@@ -10,12 +10,22 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+app.use((req, res, next) => {
+    //Update second parameter to website domain. Only chat admin should have access to API.
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
+        return res.status(200).json({})
+    }
+    next()
+})
+
 const conversationRoutes = require('./api/routes/conversations')
 const visitorRoutes = require('./api/routes/visitors')
 const userRoutes = require('./api/routes/user')
 
 mongoose.connect(process.env.ATLAS_LOGIN, {useNewUrlParser: true, useUnifiedTopology: true})
-
 
 app.use('/conversations', conversationRoutes)
 app.use('/visitors', visitorRoutes)
