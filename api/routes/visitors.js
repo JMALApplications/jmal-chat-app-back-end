@@ -6,21 +6,16 @@ router.route('/')
 .get(VisitorsController.visitors_get_all)
 .post(VisitorsController.visitors_create_visitor)
 
-router.route('/:visitor_id').get(VisitorsController.visitors_get_visitor)
+router.get('/:visitor_id', VisitorsController.visitors_get_visitor)
 
-router.route('/:visitor_id/VisitorOnline')
-.patch(VisitorsController.visitors_update_visitor_online)
+router.patch('/:visitor_id/VisitorOnline', VisitorsController.visitors_update_visitor_online)
 
-router.route('/:visitor_id/VisitorName')
-.patch(VisitorsController.visitors_update_visitor_name) 
+router.patch('/:visitor_id/VisitorName', VisitorsController.visitors_update_visitor_name)
 
-router.route('/:visitor_id/VisitorBrowser')
-.patch(VisitorsController.visitors_update_visitor_browser)
+router.patch('/:visitor_id/VisitorBrowser', VisitorsController.visitors_update_visitor_browser)
 
-router.route('/:visitor_id/VisitorPhone')
-.patch(VisitorsController.visitors_update_visitor_phone)
+router.patch('/:visitor_id/VisitorPhone', VisitorsController.visitors_update_visitor_phone)
 
-router.route('/:visitor_id/VisitorEmail')
-.patch(VisitorsController.visitors_update_visitor_email)
+router.patch('/:visitor_id/VisitorEmail', VisitorsController.visitors_update_visitor_email)
 
 module.exports = router
