@@ -4,7 +4,7 @@ The RESTful Service and Back-End processes that power the JMAL Chat Application 
 
 The finished project will consist of the following:
 
-1. A website that hosts an Admin Area
+1. A website that hosts an Admin Area - see [JMAL Chat App Website](https://github.com/JMALApplications/jmal-chat-app-website)
    - Website owners will be "Chat Operators" and the Admin Area will allow them to interact with website visitors via a front-end chat-box.
 2. A RESTful Service
 3. A chat-box that can be injected into the front-end of almost any website
