@@ -63,12 +63,10 @@ exports.conversations_get_conversation = (req, res, next) => {
 
 // Create a new conversation
 exports.conversations_create_conversation = (req, res, next) => {
-    // Generate a mongoose ObjectId
-    const id = mongoose.Types.ObjectId()
     // Create a new instance of the Conversation model
     const conversation = new Conversation({
-        _id: id,
-        visitor_id: id,
+        _id: mongoose.Types.ObjectId(),
+        visitor_id: req.body.visitor_id,
         last_message: req.body.last_message,
         last_message_time: req.body.last_message_time,
         conversation_created_date: req.body.conversation_created_date,
